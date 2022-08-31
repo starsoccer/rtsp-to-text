@@ -1,0 +1,36 @@
+name: "RTSP Actionable Notifications"
+description: "RTSP Actionable Notifications"
+version: "1.0.0"
+slug: "rtsp_actionable_notifications"
+init: false
+arch:
+  - aarch64
+  - amd64
+  - armhf
+  - armv7
+  - i386
+startup: before
+options:
+  port: 7877
+  webhook: null
+  listen_length: 15000
+  rtsp_username: null
+  rtsp_password: null
+  rtsp_url: "192.168.0.1:7441"
+  addon_username: null
+  addon_password: null
+  RTSP_lookup:
+    - device_name: null
+      rtsp_id: null
+schema:
+  port: port
+  webhook: url
+  listen_length: int(5000,60000)
+  rtsp_username: str
+  rtsp_password: password
+  rtsp_url: url
+  addon_username: str
+  addon_password: password
+  RTSP_lookup:
+    - device_name: str
+      rtsp_id: str
