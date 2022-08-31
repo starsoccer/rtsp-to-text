@@ -4,19 +4,13 @@ FROM node:16-bullseye
 
 ENV LANG C.UTF-8
 
+RUN apt update
+RUN apt install ffmpeg -y
+
 ADD package.json ./
 ADD yarn.lock ./
 
 RUN yarn
-
-RUN apt update
-RUN apt install ffmpeg -y
-#RUN \
-#    apk add --no-cache \
-#        nodejs \
-#        npm \
-#        yarn \
-#        ffmpeg
 
 # Copy data for add-on
 COPY . .
