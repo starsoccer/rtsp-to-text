@@ -17,7 +17,7 @@ options:
   listen_length: 15000
   rtsp_username: null
   rtsp_password: null
-  rtsp_url: "192.168.0.1:7441"
+  rtsp_url: "rtsps://192.168.0.1:7441"
   addon_username: null
   addon_password: null
   RTSP_lookup:
