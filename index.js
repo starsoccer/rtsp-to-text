@@ -4,7 +4,6 @@ const handleSpeech = require('./src/handleSpeech').handleSpeech;
 //const handleSpeech = require('./src/handleSpeechVosk').handleSpeech;
 const getModel = require('./src/getModel').getModel;
 const http = require('http');
-const axios = require('axios');
 const fireEvent = require('./src/fireEvent').fireEvent;
 const MODEL_PATH ='/model.tflite';
 
@@ -51,7 +50,6 @@ const server = http.createServer(function (req, res) {
     
             const stream = getRTSPStream(config.rtsp_url, config.rtsp_username, config.rtsp_password, id);
             handleSpeech(MODEL_PATH, stream, async (output) => {
-            //handleSpeech(stream, config.listenLength, async (output) => {
                 console.log('Output', output);
                 if (output) {
                     fireEvent(
@@ -62,11 +60,6 @@ const server = http.createServer(function (req, res) {
                     );
                 }
             });
-            /*recognizeSpeech(stream, async (output) => {
-                if (output) {
-                    sendResponse(req.headers.contextid, output);
-                }
-            });*/
     
             httpResponse(res, 200);
         } else {
