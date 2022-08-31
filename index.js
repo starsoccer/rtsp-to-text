@@ -5,6 +5,7 @@ const handleSpeech = require('./src/handleSpeech').handleSpeech;
 const getModel = require('./src/getModel').getModel;
 const http = require('http');
 const axios = require('axios');
+const fireEvent = require('./src/fireEvent').fireEvent;
 const MODEL_PATH ='/model.tflite';
 
 const config = require(process.env.CONFIG_PATH);
@@ -22,14 +23,6 @@ const httpResponse = (res, statusCode, data) => {
     res.end();
 }
 
-const sendResponse = (contextID, data) => {
-    axios.post(config.webhook, {
-        result: true,
-        data,
-        contextID,
-    });
-}
-
 const validateAuth = (authHeader) => {
     var token = authHeader.split(/\s+/).pop() || '';        // and the encoded auth token
     var auth = Buffer.from(token, 'base64').toString(); // convert from base64
@@ -45,7 +38,7 @@ const validateAuth = (authHeader) => {
 
 
 const server = http.createServer(function (req, res) {
-    console.log('Got a request sir');
+    console.log('Got a request sir', new Date());
     if (validateAuth(req.headers.authorization)) {    
         const path = req.url.substr(1);
         const contextID = req.headers.contextid || req.headers.contextID;
@@ -61,7 +54,12 @@ const server = http.createServer(function (req, res) {
             //handleSpeech(stream, config.listenLength, async (output) => {
                 console.log('Output', output);
                 if (output) {
-                    sendResponse(req.headers.contextid, output);
+                    fireEvent(
+                        'rtsp_actionable_notifications_speech',
+                        process.env.SUPERVISOR_TOKEN,
+                        contextID,
+                        output
+                    );
                 }
             });
             /*recognizeSpeech(stream, async (output) => {
