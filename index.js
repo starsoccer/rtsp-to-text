@@ -1,7 +1,5 @@
 const getRTSPStream = require('./src/getRTSPStream').getRTSPStream;
-//const recognizeSpeech = require('./src/recognizeSpeech').recognizeSpeech;
 const handleSpeech = require('./src/handleSpeech').handleSpeech;
-//const handleSpeech = require('./src/handleSpeechVosk').handleSpeech;
 const getModel = require('./src/getModel').getModel;
 const http = require('http');
 const fireEvent = require('./src/fireEvent').fireEvent;
@@ -50,7 +48,7 @@ const server = http.createServer(function (req, res) {
     
             const stream = getRTSPStream(config.rtsp_url, config.rtsp_username, config.rtsp_password, id);
             handleSpeech(MODEL_PATH, stream, async (output) => {
-                console.log('Output', output);
+                console.log('Output', output, new Date());
                 if (output) {
                     fireEvent(
                         'rtsp_actionable_notifications_speech',
