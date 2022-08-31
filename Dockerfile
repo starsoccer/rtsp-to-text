@@ -7,6 +7,8 @@ ENV LANG C.UTF-8
 ADD package.json ./
 ADD yarn.lock ./
 
+RUN yarn
+
 RUN apt update
 RUN apt install ffmpeg -y
 #RUN \

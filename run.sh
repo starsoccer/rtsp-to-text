@@ -15,8 +15,5 @@ npm -v
 yarn -v
 ffmpeg -version
 
-echo Install Node Modules!
-yarn
-
 echo Starting Server
 node index.js
