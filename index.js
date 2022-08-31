@@ -2,10 +2,13 @@ const getRTSPStream = require('./src/getRTSPStream').getRTSPStream;
 //const recognizeSpeech = require('./src/recognizeSpeech').recognizeSpeech;
 const handleSpeech = require('./src/handleSpeech').handleSpeech;
 //const handleSpeech = require('./src/handleSpeechVosk').handleSpeech;
+const getModel = require('./src/getModel').getModel;
 const http = require('http');
 const axios = require('axios');
+const MODEL_PATH ='/model.tflite';
 
 const config = require(process.env.CONFIG_PATH);
+getModel(config.model_url, MODEL_PATH);
 const RTSPLookup = config.RTSP_lookup.reduce((lookup,item)=> (lookup[item.device_name]=item.rtsp_id,lookup),{});
 
 const httpResponse = (res, statusCode, data) => {
@@ -54,7 +57,7 @@ const server = http.createServer(function (req, res) {
             console.log(`Location mapped to ${id}`);
     
             const stream = getRTSPStream(config.rtsp_url, config.rtsp_username, config.rtsp_password, id);
-            handleSpeech(stream, async (output) => {
+            handleSpeech(MODEL_PATH, stream, async (output) => {
             //handleSpeech(stream, config.listenLength, async (output) => {
                 console.log('Output', output);
                 if (output) {

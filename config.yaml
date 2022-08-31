@@ -13,6 +13,7 @@ startup: before
 options:
   port: 7877
   webhook: null
+  model_url: "https://coqui.gateway.scarf.sh/english/coqui/v1.0.0-yesno/model_quantized.tflite"
   listen_length: 15000
   rtsp_username: null
   rtsp_password: null
@@ -25,6 +26,7 @@ options:
 schema:
   port: port
   webhook: url
+  model_url: url
   listen_length: int(5000,60000)
   rtsp_username: str
   rtsp_password: password

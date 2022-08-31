@@ -3,8 +3,8 @@ const Ds = require('stt');
 const intentMatch = require('./intentMatch').intentMatch;
 const kill = require('tree-kill');
 
-async function handleSpeech(streamChildProcess, callback) {
-    const model = new Ds.Model('./model.tflite');
+async function handleSpeech(modelPath, streamChildProcess, callback) {
+    const model = new Ds.Model(modelPath);
     const audioStream = model.createStream();
 
     console.log('Starting STT Conversion');
