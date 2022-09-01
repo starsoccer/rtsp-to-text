@@ -1,17 +1,15 @@
 const vosk = require('vosk');
 const intentMatch = require('./intentMatch').intentMatch;
 const kill = require('tree-kill');
+const path = require('path');
 
 const getRecognizer = () => {
     if (global.recognizer) {
         return global.recognizer;
     }
 
-    console.log(require('fs').readdirSync('./'));
-    console.log(require('fs').readdirSync('./models'));
-    console.log(require('fs').readdirSync('./models/vosk'));
-
-    const model = new vosk.Model('./models/vosk');
+    const modelPath = path.join(process.env.model_path, 'vosk');
+    const model = new vosk.Model(modelPath);
     const rec = new vosk.Recognizer({model: model, sampleRate: 16000});
     global.recognizer = rec;
     return rec;

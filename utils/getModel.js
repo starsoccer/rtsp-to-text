@@ -2,10 +2,13 @@ const fs = require('fs');
 const path = require('path');
 const extract = require('extract-zip');
 const download = require('download');
+const readConfig = require('./readConfig').readConfig;
 
-const getModel = async (url, modelPath) =>{
+const getModel = async () =>{
     console.log('Starting Model Download');
+    const modelPath = process.env.model_path;
     const modelFilePath = path.join(modelPath, 'vosk.zip');
+    const url = readConfig().model_url;
 
     if (!fs.existsSync(modelPath)){
         fs.mkdirSync(modelPath);
@@ -17,8 +20,9 @@ const getModel = async (url, modelPath) =>{
     );
 
     await extract(modelFilePath, { dir: modelPath });
+    fs.unlinkSync(modelFilePath);
 
-    const folders = fs.readdirSync('./models');
+    const folders = fs.readdirSync(modelPath);
     const folder = folders[0];
     const folderPath = path.join(modelPath, folder);
     fs.renameSync(folderPath, path.join(modelPath, 'vosk'));
@@ -26,4 +30,4 @@ const getModel = async (url, modelPath) =>{
     console.log('Model Download Complete');
 }
 
-module.exports = { getModel };
+getModel();

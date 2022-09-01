@@ -12,6 +12,9 @@ arch:
   - armv7
   - i386
 startup: before
+environment:
+  model_path: "/models"
+  vosk_so_path: "/vosk_so"
 options:
   port: 7877
   model_url: "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip"

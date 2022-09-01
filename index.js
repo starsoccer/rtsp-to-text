@@ -1,12 +1,10 @@
 const getRTSPStream = require('./src/getRTSPStream').getRTSPStream;
 const handleSpeech = require('./src/handleSpeechVosk').handleSpeech;
-const getModel = require('./src/getModel').getModel;
+const readConfig = require('./utils/readConfig').readConfig;
 const http = require('http');
 const fireEvent = require('./src/fireEvent').fireEvent;
-const MODEL_PATH ='/models/';
 
-const config = require(process.env.CONFIG_PATH);
-getModel(config.model_url, MODEL_PATH);
+const config = readConfig();
 const RTSPLookup = config.RTSP_lookup.reduce((lookup,item)=> (lookup[item.device_name]=item.rtsp_id,lookup),{});
 
 const httpResponse = (res, statusCode, data) => {
