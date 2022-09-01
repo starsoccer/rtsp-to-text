@@ -1,7 +1,7 @@
-name: "RTSP Actionable Notifications"
-description: "RTSP Actionable Notifications"
+name: "RTSP To Text"
+description: "RTSP To Text"
 version: "1.0.0"
-slug: "rtsp_actionable_notifications"
+slug: "rtsp_to_text"
 init: false
 homeassistant_api: true
 realtime: true
