@@ -3,7 +3,7 @@ const axios = require('axios');
 const url = 'http://supervisor/core/api/events';
 
 const fireEvent = (eventType, bearerToken, contextID, data) => {
-    console.log('Sending Response', eventType, bearerToken, contextID, data, new Date());
+    global.logger.trace({eventType, contextID, data}, 'Sending Event to HA');
     try {
         axios.post(
             `${url}/${eventType}`,
@@ -18,8 +18,8 @@ const fireEvent = (eventType, bearerToken, contextID, data) => {
                 }
             }
         );
-    } catch (err) {
-        console.log('Safely Caught Error', err);
+    } catch (error) {
+        global.logger.error({error}, 'Axios Event Error');
     }
 }
 

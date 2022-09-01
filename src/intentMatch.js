@@ -2,7 +2,7 @@ const YES = 'yes';
 const NO = 'no';
 
 function intentMatch (text) {
-    console.log('Speech interpreted as:', text, new Date());
+    global.logger.debug({STT: text}, 'Attempting to match Intent');
     if (
         text.includes('y') ||
         text.includes('sure') ||

@@ -11,12 +11,9 @@ echo "NPM Version: $(npm -v)"
 echo "Yarn Version: $(yarn -v)"
 ffmpeg -version
 
-echo Checking Vosk SO
+echo Running Init Scripts
 node ./utils/getVoskSO.js
-
-echo Getting Model
 node ./utils/getModel.js
-echo Model Loaded
 
 echo Starting Server
 node index.js

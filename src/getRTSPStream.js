@@ -5,7 +5,7 @@ function getRTSPStream (url, username, password, streamID) {
     fullURL.pathname = streamID
     fullURL.search = 'enableSrtp';
 
-    console.log(`Opening Stream to ${fullURL.toString()}`);
+    global.logger.trace({rtsp: fullURL.toString()}, `Starting Stream`);
 
     const child_process = require('child_process');
     const options = [
@@ -23,11 +23,11 @@ function getRTSPStream (url, username, password, streamID) {
         shell: true,
     });
 
-    const on_exit = (e) => {
-        if (e) {
-            console.error('ERROR', e);
+    const on_exit = (error) => {
+        if (error) {
+            global.logger.error({error: e}, `FFMPEG Error`);
         } else {
-            console.log('FFMPEG closing cleaning');
+            global.logger.trace(`FFMPEG Closed Cleanly`);
         }
     }
 
