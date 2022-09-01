@@ -1,9 +1,9 @@
 const getRTSPStream = require('./src/getRTSPStream').getRTSPStream;
-const handleSpeech = require('./src/handleSpeech').handleSpeech;
+const handleSpeech = require('./src/handleSpeechVosk').handleSpeech;
 const getModel = require('./src/getModel').getModel;
 const http = require('http');
 const fireEvent = require('./src/fireEvent').fireEvent;
-const MODEL_PATH ='/model.tflite';
+const MODEL_PATH ='/models/';
 
 const config = require(process.env.CONFIG_PATH);
 getModel(config.model_url, MODEL_PATH);
@@ -47,7 +47,7 @@ const server = http.createServer(function (req, res) {
             console.log(`Location mapped to ${id}`);
     
             const stream = getRTSPStream(config.rtsp_url, config.rtsp_username, config.rtsp_password, id);
-            handleSpeech(MODEL_PATH, stream, async (output) => {
+            handleSpeech(stream, config.listen_length, async (output) => {
                 console.log('Output', output, new Date());
                 if (output) {
                     fireEvent(

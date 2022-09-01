@@ -4,6 +4,7 @@ version: "1.0.0"
 slug: "rtsp_actionable_notifications"
 init: false
 homeassistant_api: true
+realtime: true
 arch:
   - aarch64
   - amd64
@@ -13,7 +14,7 @@ arch:
 startup: before
 options:
   port: 7877
-  model_url: "https://coqui.gateway.scarf.sh/english/coqui/v1.0.0-yesno/model_quantized.tflite"
+  model_url: "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip"
   listen_length: 15000
   rtsp_username: null
   rtsp_password: null
