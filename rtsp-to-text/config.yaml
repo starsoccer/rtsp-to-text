@@ -2,6 +2,7 @@ name: "RTSP To Text"
 description: "RTSP To Text"
 version: "0.0.1"
 slug: "rtsp_to_text"
+image: "starsoccer/homeassistant-{arch}-rtsp-to-text"
 init: false
 homeassistant_api: true
 realtime: true

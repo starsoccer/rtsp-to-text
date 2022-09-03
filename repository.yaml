@@ -1,0 +1,3 @@
+# https://developers.home-assistant.io/docs/add-ons/repository#repository-configuration
+name: RTSP-To-Text Repo
+url: 'https://github.com/starsoccer/rtsp-to-text'
