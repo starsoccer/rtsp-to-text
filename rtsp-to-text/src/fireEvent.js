@@ -10,7 +10,7 @@ const fireEvent = (eventType, bearerToken, contextID, data) => {
             {
                 result: true,
                 data,
-                contextID,
+                context_id: contextID,
             },
             {
                 headers: {

@@ -1,6 +1,6 @@
 name: "RTSP To Text"
 description: "RTSP To Text"
-version: "0.0.1"
+version: "0.0.2"
 slug: "rtsp_to_text"
 image: "ghcr.io/starsoccer/rtsp-to-text/{arch}"
 init: false
