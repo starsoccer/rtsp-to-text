@@ -25,7 +25,7 @@ function getRTSPStream (url, username, password, streamID) {
 
     const on_exit = (error) => {
         if (error) {
-            global.logger.error({error: e}, `FFMPEG Error`);
+            global.logger.error({error}, `FFMPEG Error`);
         } else {
             global.logger.trace(`FFMPEG Closed Cleanly`);
         }
